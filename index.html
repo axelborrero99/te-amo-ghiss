@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ghiss ❤️</title>
+  <style>
+    :root{
+      --rosa:#ff5f8f;
+      --rosa2:#ff8fb1;
+      --vino:#8e2148;
+      --crema:#fff6f8;
+      --texto:#4b1730;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--texto);
+      min-height:100vh;
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at top left,#ffdbe7 0 25%,transparent 26%),
+        linear-gradient(135deg,#fff7fa,#ffe1ea 55%,#ffd1df);
+    }
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .heart{position:absolute;bottom:-40px;font-size:24px;animation:floatUp linear forwards;opacity:.9}
+    @keyframes floatUp{
+      to{transform:translateY(-115vh) rotate(360deg);opacity:0}
+    }
+    main{position:relative;z-index:1;max-width:760px;margin:auto;padding:22px}
+    .card{
+      background:rgba(255,255,255,.76);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:28px;
+      box-shadow:0 18px 50px rgba(142,33,72,.18);
+      padding:28px;
+      margin:18px 0;
+    }
+    .hero{
+      min-height:82vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .bigheart{
+      font-size:86px;
+      animation:pulse 1.2s infinite;
+      filter:drop-shadow(0 10px 18px rgba(255,95,143,.25));
+    }
+    @keyframes pulse{50%{transform:scale(1.12)}}
+    h1{font-size:clamp(38px,7vw,70px);line-height:.98;margin:18px 0 10px}
+    h2{font-size:28px;margin:4px 0 18px}
+    p{font-size:18px;line-height:1.6}
+    .gradient{
+      background:linear-gradient(90deg,var(--vino),var(--rosa));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding:15px 24px;
+      font-size:17px;
+      font-weight:700;
+      cursor:pointer;
+      background:linear-gradient(90deg,var(--rosa),var(--rosa2));
+      color:white;
+      box-shadow:0 12px 25px rgba(255,95,143,.3);
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.02)}
+    .meter{
+      width:100%;
+      height:18px;
+      border-radius:999px;
+      background:#f5cbd9;
+      overflow:hidden;
+      margin:16px 0 8px;
+    }
+    .fill{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,#ff4b79,#ff9fbc);
+      transition:width 2s ease;
+    }
+    .reasons{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:14px;
+    }
+    .reason{
+      background:#fff;
+      border-radius:20px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(142,33,72,.08);
+      min-height:120px;
+    }
+    .reason b{display:block;font-size:24px;margin-bottom:8px}
+    .quote{
+      text-align:center;
+      font-size:24px;
+      font-weight:700;
+      min-height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .secret{
+      display:none;
+      text-align:center;
+      margin-top:18px;
+      padding:18px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#fff,#ffe3ec);
+    }
+    .footer{text-align:center;opacity:.72;padding:28px 10px 50px}
+    .tiny{font-size:14px;opacity:.72}
+  </style>
+
+  <meta name="theme-color" content="#ff5f8f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Para Ghiss">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main>
+    <section class="card hero">
+      <div class="bigheart">❤️</div>
+      <div class="tiny">Hice esto pensando en ti</div>
+      <h1 class="gradient">Ghiss, te amo más de lo que a veces sé explicar</h1>
+      <p>
+        A veces siento que no encuentro las palabras exactas para decirte todo lo que significas para mí, así que quise dejarte esto.
+      </p>
+      <button class="btn" onclick="startLove()">Toca aquí 💗</button>
+
+      <button class="btn" id="installBtn" style="display:none;margin-top:12px;background:linear-gradient(90deg,#8e2148,#ff5f8f)">
+        Guardar en mi celular 📱
+      </button>
+
+    </section>
+
+    <section class="card" id="amor">
+      <h2>Lo que siento por ti</h2>
+      <p>Si tuviera que ponerle un número a lo que siento por ti, creo que pasaría esto:</p>
+      <div class="meter"><div class="fill" id="fill"></div></div>
+      <p id="loveText"><b>0%</b> calculando...</p>
+    </section>
+
+    <section class="card">
+      <h2>Cosas que amo de ti</h2>
+      <div class="reasons">
+        <div class="reason"><b>01 💕</b>Porque contigo hasta un día normal puede convertirse en un recuerdo bonito.</div>
+        <div class="reason"><b>02 ✨</b>Porque tu forma de ser hace que mis días se sientan más bonitos.</div>
+        <div class="reason"><b>03 🫶</b>Porque contigo puedo ser yo, sin tener que fingir nada.</div>
+        <div class="reason"><b>04 🌷</b>Porque me encanta verte feliz, incluso por las cosas más pequeñas.</div>
+        <div class="reason"><b>05 🏡</b>Porque muchas veces tú eres mi lugar favorito.</div>
+        <div class="reason"><b>06 ♾️</b>Porque mientras más tiempo pasa, encuentro nuevas razones para quererte.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Algo que quiero que recuerdes</h2>
+      <div class="quote" id="quote">“Si hoy no te lo he dicho suficiente: te amo.”</div>
+      <div style="text-align:center">
+        <button class="btn" onclick="newQuote()">Otro mensaje 💌</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Para los días difíciles</h2>
+      <p>Lee esto cuando tengas un día difícil, cuando estés triste o cuando simplemente necesites sentirme un poquito más cerca.</p>
+      <button class="btn" onclick="showSecret()">Quiero amor ❤️</button>
+      <div class="secret" id="secret">
+        <div style="font-size:42px">🫂❤️</div>
+        <h2>Ven aquí.</h2>
+        <p>
+          No importa cómo haya sido tu día. Quiero que recuerdes que eres muy especial para mí,
+          que me encanta tenerte en mi vida y que siempre voy a querer verte sonreír.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Una promesa</h2>
+      <p style="font-size:21px;text-align:center">
+        Voy a seguir buscando formas de hacerte sonreír, incluso con detalles pequeños como este. ❤️
+      </p>
+    </section>
+
+    <div class="footer">
+      Para ti, Ghiss. Con todo mi amor. ❤️
+    </div>
+  </main>
+
+  <script>
+    const messages = [
+      "“Si hoy no te lo he dicho suficiente: te amo.”",
+      "“De todos mis lugares favoritos, el mejor sigue siendo contigo.”",
+      "“No necesito un día especial para recordar lo mucho que significas para mí.”",
+      "“Gracias por existir justo en la misma época que yo.”",
+      "“Te elegiría incluso en otro universo.”",
+      "“Mi parte favorita del día muchas veces empieza cuando apareces tú.”",
+      "“Si pudiera regalarte una cosa, sería verte con mis ojos para que entiendas lo especial que eres para mí.”"
+    ];
+
+    function startLove(){
+      document.getElementById('amor').scrollIntoView({behavior:'smooth'});
+      setTimeout(()=>{
+        document.getElementById('fill').style.width='100%';
+        document.getElementById('loveText').innerHTML='<b>∞%</b> — y todavía siento que ese número se queda corto ❤️';
+      },600);
+      burst();
+    }
+
+    function newQuote(){
+      const q = messages[Math.floor(Math.random()*messages.length)];
+      document.getElementById('quote').textContent=q;
+      burst();
+    }
+
+    function showSecret(){
+      document.getElementById('secret').style.display='block';
+      burst(16);
+    }
+
+    function burst(count=10){
+      for(let i=0;i<count;i++){
+        setTimeout(createHeart,i*80);
+      }
+    }
+
+    function createHeart(){
+      const holder=document.getElementById('hearts');
+      const el=document.createElement('div');
+      el.className='heart';
+      el.textContent=['❤️','💗','💕','💖'][Math.floor(Math.random()*4)];
+      el.style.left=Math.random()*100+'vw';
+      el.style.animationDuration=(3+Math.random()*3)+'s';
+      el.style.fontSize=(18+Math.random()*22)+'px';
+      holder.appendChild(el);
+      setTimeout(()=>el.remove(),6500);
+    }
+
+    setInterval(()=>{ if(Math.random()>.55) createHeart(); },900);
+  
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+      burst(20);
+    });
+
+  </script>
+</body>
+</html>
